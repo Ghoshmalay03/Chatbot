@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Home Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="chat-container">
+    <header class="chat-header">
+      <h1>Smart Home Assistant</h1>
+      <p>Your AI guide for smart home control</p>
+    </header>
+    
+    <div id="chat-box">
+      <div id="messages" class="messages"></div>
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="Ask me about your smart home..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>
