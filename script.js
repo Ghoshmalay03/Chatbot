@@ -34,3 +34,13 @@ function appendMessage(sender, message) {
     }
   }
   
+  function toggleProfilePopup() {
+    const popup = document.getElementById('profilePopup');
+    popup.classList.toggle('hidden');
+  }
+  
+  function toggleHomePopup() {
+    const popup = document.getElementById('homePopup');
+    popup.classList.toggle('hidden');
+  }
+  

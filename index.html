@@ -3,25 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Home Assistant</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Smart Home AI Assistant</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="chat-container">
-    <header class="chat-header">
-      <h1>Smart Home Assistant</h1>
-      <p>Your AI guide for smart home control</p>
-    </header>
-    
-    <div id="chat-box">
-      <div id="messages" class="messages"></div>
-      <div class="input-area">
-        <input type="text" id="userInput" placeholder="Ask me about your smart home..." />
-        <button onclick="sendMessage()">Send</button>
-      </div>
+  <!-- User Profile Button & Popup -->
+  <div class="user-profile-container">
+    <button class="profile-button" onclick="toggleProfilePopup()">👤</button>
+    <div id="profilePopup" class="profile-popup hidden">
+      <h3>User Profile</h3>
+      <p><strong>Name:</strong> AI SmartHome</p>
+      <p><strong>Email:</strong> smarthome@gmail.com</p>
+      <hr />
+      <button onclick="alert('Settings clicked')">Settings</button>
+      <button onclick="alert('Logout clicked')">Logout</button>
     </div>
   </div>
 
-  <script src="chatbot.js"></script>
+  <!-- Chatbot -->
+  <div class="chat-container">
+    <div class="chat-header">Smart Home Assistant</div>
+    <div id="chatbox" class="chat-box"></div>
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Ask me about your smart home..." />
+      <button onclick="handleUserInput()">Send</button>
+    </div>
+  </div>
+
+  <!-- Home Popup Button -->
+<div class="home-popup-container">
+    <button class="home-button" onclick="toggleHomePopup()">🏠</button>
+    <div id="homePopup" class="home-popup hidden">
+      <h3>Home Menu</h3>
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Devices</a></li>
+        <li><a href="#">Scenes</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
 </body>
 </html>
