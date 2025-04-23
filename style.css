@@ -1,250 +1,98 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
+body {
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-image: url(https://d251cvb8f7e7p0.cloudfront.net/images/Article_Images/ImageForArticle_8429_16351685737155365.jpg);
-    background-blend-mode: exclusion;
-  }
-  
-  .chat-container {
-    width: 100cm;
-    max-width: 800px;
-    background: whitesmoke;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding-bottom: 10px;
-  }
-  
-  .chat-header {
-    background-color: #0077cc;
-    color: white;
-    padding: 15px 15px 15px; /* Top, sides, bottom */
-    font-size: 20px;
-    text-align: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-  
-  
-  
-  .chat-header h1 {
-    margin: 0;
-    font-size: 1.5cm;
-  }
-  
-  .chat-header p {
-    margin: 0.25rem 0 0;
-    font-size: 0.9rem;
-    opacity: 0.8;
-  }
-  
-  #chat-box {
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.chat-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 90%;
     display: flex;
     flex-direction: column;
-    height: 100cm;
-    padding: 10cm;
-  }
-  
-  .messages {
+    overflow: hidden; /* Ensures children don't overflow rounded corners */
+}
+
+.chat-header {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.chat-box {
     flex-grow: 1;
-    overflow-y: auto;
-    padding-right: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .message {
-    margin: 0.5rem 0;
-    padding: 0.75rem 1rem;
-    border-radius: 20px;
-    max-width: 75%;
+    padding: 15px;
+    height: 400px; /* Fixed height for scrollability */
+    overflow-y: auto; /* Enable scrolling */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #e9e9e9;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 80%;
     word-wrap: break-word;
-    font-size: 0.95rem;
-  }
-  
-  .user {
-    background: #007bff;
-    color: white;
+    line-height: 1.4;
+}
+
+.user-message {
+    background-color: #dcf8c6; /* Light green */
     align-self: flex-end;
-  }
-  
-  .bot {
-    background: #ecf0f1;
-    color: #333;
+    border-bottom-right-radius: 5px; /* Give it a 'tail' */
+}
+
+.bot-message {
+    background-color: #ffffff; /* White */
     align-self: flex-start;
-  }
-  
-  .input-area {
+    border-bottom-left-radius: 5px; /* Give it a 'tail' */
+}
+
+.message p {
+    margin: 0;
+}
+
+.chat-input {
     display: flex;
-    gap: 0.5rem;
-  }
-  
-  input[type="text"] {
-    flex-grow: 1;
-    padding: 0.75rem 1rem;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-  
-  button {
-    padding: 0.75rem 1.25rem;
-    border: none;
-    border-radius: 25px;
-    background-color: #2ecc71;
-    color: black;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #27ae60;
-  }
-  
-  .user-profile-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 999;
-  }
-  
-  .profile-button {
-    background-color: #0077cc;
-    color: orange;
-    border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-    
-    /* Center the icon */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-  }
-    
-  .profile-button:hover {
-    background-color: #005fa3;
-  }
-  
-  .profile-popup {
-    position: absolute;
-    top: 55px;
-    right: 0;
-    width: 220px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    padding: 16px;
-    font-size: 14px;
-    z-index: 1000;
-  }
-  
-  .profile-popup h3 {
-    margin-bottom: 10px;
-    color: #0077cc;
-  }
-  
-  .profile-popup button {
-    margin-top: 10px;
-    width: 100%;
-    padding: 8px;
-    border: none;
+    border-top: 1px solid #ddd;
+    padding: 10px;
     background-color: #f0f0f0;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .profile-popup button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  .home-popup-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 999;
-  }
-  
-  .home-button {
-    background-color: #0077cc;
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+#send-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 20px;
+    border-radius: 20px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
-    padding: 0;
-  }
-  
-  .home-button:hover {
-    background-color: #005fa3;
-  }
-  
-  .home-popup {
-    position: absolute;
-    top: 55px;
-    left: 0;
-    width: 180px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    padding: 16px;
-    font-size: 14px;
-  }
-  
-  .home-popup h3 {
-    margin-bottom: 10px;
-    color: #0077cc;
-  }
-  
-  .home-popup ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .home-popup ul li {
-    margin-bottom: 8px;
-  }
-  
-  .home-popup ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  
-  .home-popup ul li a:hover {
-    color: #0077cc;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
+}
+
+#send-button:hover {
+    background-color: #45a049;
+} 
