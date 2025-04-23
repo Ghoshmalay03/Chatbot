@@ -1,48 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Home AI Assistant</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Indian Grocery Budget Planner</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link to your custom CSS if needed later -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        /* Basic styling to prevent FOUC and ensure body takes height */
+        body { background-color: #f3f4f6; }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
 </head>
-<body>
-  <!-- User Profile Button & Popup -->
-  <div class="user-profile-container">
-    <button class="profile-button" onclick="toggleProfilePopup()">👤</button>
-    <div id="profilePopup" class="profile-popup hidden">
-      <h3>User Profile</h3>
-      <p><strong>Name:</strong> AI SmartHome</p>
-      <p><strong>Email:</strong> smarthome@gmail.com</p>
-      <hr />
-      <button onclick="alert('Settings clicked')">Settings</button>
-      <button onclick="alert('Logout clicked')">Logout</button>
-    </div>
-  </div>
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
 
-  <!-- Chatbot -->
-  <div class="chat-container">
-    <div class="chat-header">Smart Home Assistant</div>
-    <div id="chatbox" class="chat-box"></div>
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="Ask me about your smart home..." />
-      <button onclick="handleUserInput()">Send</button>
-    </div>
-  </div>
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-emerald-500 to-green-600 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold flex items-center"><i class="fas fa-shopping-basket mr-2"></i> Smart Grocery Planner (INR)</h1>
+            <!-- Optional: Add Nav Links Here -->
+        </div>
+    </header>
 
-  <!-- Home Popup Button -->
-<div class="home-popup-container">
-    <button class="home-button" onclick="toggleHomePopup()">🏠</button>
-    <div id="homePopup" class="home-popup hidden">
-      <h3>Home Menu</h3>
-      <ul>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Devices</a></li>
-        <li><a href="#">Scenes</a></li>
-      </ul>
-    </div>
-  </div>
-  
-  <script src="script.js"></script>
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-4 flex-grow">
+        <!-- SECURITY WARNING: Embedding API keys directly in client-side code is insecure! -->
+        <!-- For production, use a backend proxy. -->
+        <!-- const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE"; -->
+
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Column 1: Budget & Input -->
+            <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700 border-b pb-2"><i class="fas fa-rupee-sign mr-2"></i> Weekly Budget Plan</h2>
+
+                <div class="mb-4">
+                    <label for="weekly-budget" class="block text-sm font-medium text-gray-600 mb-1">Total Weekly Budget (INR):</label>
+                    <input type="number" id="weekly-budget" placeholder="e.g., 2000" class="w-full p-2 border border-gray-300 rounded-md focus:ring-emerald-500 focus:border-emerald-500">
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-md font-medium text-gray-600 mb-2">Budget Breakdown (Optional):</h3>
+                    <div class="space-y-2">
+                        <div>
+                            <label for="budget-produce" class="block text-xs text-gray-500">Produce (₹):</label>
+                            <input type="number" id="budget-produce" placeholder="e.g., 500" class="w-full p-1 border border-gray-200 rounded-md text-sm">
+                        </div>
+                        <div>
+                            <label for="budget-protein" class="block text-xs text-gray-500">Proteins (Dal, Eggs, etc.) (₹):</label>
+                            <input type="number" id="budget-protein" placeholder="e.g., 600" class="w-full p-1 border border-gray-200 rounded-md text-sm">
+                        </div>
+                        <div>
+                            <label for="budget-pantry" class="block text-xs text-gray-500">Pantry (Rice, Atta, Spices) (₹):</label>
+                            <input type="number" id="budget-pantry" placeholder="e.g., 700" class="w-full p-1 border border-gray-200 rounded-md text-sm">
+                        </div>
+                         <div>
+                            <label for="budget-other" class="block text-xs text-gray-500">Other (Snacks, Dairy) (₹):</label>
+                            <input type="number" id="budget-other" placeholder="e.g., 200" class="w-full p-1 border border-gray-200 rounded-md text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="mb-4">
+                    <label for="preferences" class="block text-sm font-medium text-gray-600 mb-1">Preferences / Needs:</label>
+                    <textarea id="preferences" rows="3" placeholder="e.g., vegetarian, need quick meals, avoid spicy food, have onions and tomatoes already..." class="w-full p-2 border border-gray-300 rounded-md focus:ring-emerald-500 focus:border-emerald-500 text-sm"></textarea>
+                </div>
+
+                <button id="plan-button" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-md transition duration-150 ease-in-out flex items-center justify-center">
+                    <i class="fas fa-magic mr-2"></i> Generate Plan
+                </button>
+                 <div id="loading-indicator" class="text-center mt-4 text-gray-500 hidden">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> Generating plan...
+                </div>
+            </div>
+
+            <!-- Column 2: Meal Suggestions & Shopping List -->
+            <div class="md:col-span-2 space-y-6">
+                <!-- Meal Suggestions -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-700 border-b pb-2"><i class="fas fa-utensils mr-2"></i> Weekly Meal Suggestions</h2>
+                    <div id="meal-plan-output" class="text-gray-600 text-sm min-h-[150px] max-h-[300px] overflow-y-auto p-2 border rounded bg-gray-50">
+                        Enter your budget and preferences, then click "Generate Plan".
+                    </div>
+                </div>
+
+                <!-- Shopping List -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-700 border-b pb-2"><i class="fas fa-list-alt mr-2"></i> Generated Shopping List</h2>
+                    <div id="shopping-list-output" class="text-gray-600 text-sm min-h-[150px] max-h-[300px] overflow-y-auto p-2 border rounded bg-gray-50">
+                        Your shopping list will appear here...
+                    </div>
+                     <p class="text-xs text-gray-500 mt-2">Estimated Costs (INR) are indicative and based on common market prices.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Savings Tips Section -->
+        <div class="mt-6 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 border-b pb-2"><i class="fas fa-lightbulb mr-2"></i> Cost-Saving Tips (India)</h2>
+            <div id="savings-tips-output" class="text-gray-600 text-sm">
+                Tips relevant to your plan will appear here...
+                 <ul class="list-disc pl-5 space-y-1 mt-2">
+                    <li>Buy seasonal vegetables and fruits for lower prices and better quality.</li>
+                    <li>Compare prices at local markets (mandis) vs. supermarkets like D-Mart or Big Bazaar.</li>
+                    <li>Plan meals around staples like dal, rice, roti, and seasonal sabzis.</li>
+                    <li>Consider buying grains and pulses in bulk if storage allows.</li>
+                    <li>Look for deals and offers, especially during festive seasons.</li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-700 text-white text-center p-3 mt-8">
+        <p class="text-sm">&copy; 2024 Smart Grocery Planner. Disclaimer: AI suggestions are for planning purposes only.</p>
+    </footer>
+
+    <!-- Link to your JavaScript file -->
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 
